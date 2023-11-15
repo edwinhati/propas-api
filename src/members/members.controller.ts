@@ -15,7 +15,10 @@ export class MembersController {
   constructor(private readonly membersService: MembersService) {}
   @Post()
   create(@Body() createMemberDto: CreateMemberDto) {
-    return this.membersService.create(createMemberDto);
+    return this.membersService.create({
+      ...createMemberDto,
+      date_of_birth: new Date(createMemberDto.date_of_birth),
+    });
   }
 
   @Get()

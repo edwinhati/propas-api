@@ -39,6 +39,8 @@ export class CreateMemberDto {
 
   @IsEmail()
   email: string;
+
+  password: string;
 }
 
 export class UpdateMemberDto extends PartialType(CreateMemberDto) {}

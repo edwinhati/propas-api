@@ -1,4 +1,5 @@
 import { IsString, IsDate, IsEmail } from 'class-validator';
+import { PartialType } from '@nestjs/swagger';
 
 export class CreateMemberDto {
   @IsString()
@@ -10,7 +11,7 @@ export class CreateMemberDto {
   @IsString()
   place_of_birth: string;
 
-  // @IsDate()
+  @IsDate()
   date_of_birth: Date;
 
   @IsString()
@@ -39,3 +40,5 @@ export class CreateMemberDto {
   @IsEmail()
   email: string;
 }
+
+export class UpdateMemberDto extends PartialType(CreateMemberDto) {}

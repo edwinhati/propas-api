@@ -1,14 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMemberDto, UpdateMemberDto } from './member.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class MembersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createMemberDto: CreateMemberDto) {
+  async create(createMemberDto: CreateMemberDto) {
+    const saltOrRounds = 10;
+    const passwordHash = await bcrypt.hash(
+      createMemberDto.password,
+      saltOrRounds,
+    );
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...data } = createMemberDto;
+
+    const memberData = {
+      ...data,
+      password: passwordHash,
+    };
+
     return this.prisma.member.create({
-      data: createMemberDto,
+      data: memberData,
     });
   }
 

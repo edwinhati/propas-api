@@ -5,12 +5,15 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { AppService } from './app.service';
 
 @Controller('')
 export class AppController {
+  constructor(private readonly appService: AppService) {}
+
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    await this.appService.uploadFile(file.originalname, file);
   }
 }

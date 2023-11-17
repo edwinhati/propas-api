@@ -1,5 +1,6 @@
 import { IsString, IsDate, IsEmail } from 'class-validator';
 import { PartialType } from '@nestjs/swagger';
+import { Role } from 'src/roles/roles.decorator';
 
 export class CreateMemberDto {
   @IsString()
@@ -42,6 +43,8 @@ export class CreateMemberDto {
 
   @IsString()
   password: string;
+
+  roles: Role[];
 }
 
 export class UpdateMemberDto extends PartialType(CreateMemberDto) {}

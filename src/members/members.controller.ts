@@ -22,9 +22,9 @@ export class MembersController {
     return this.membersService.create({
       ...createMemberDto,
       date_of_birth: new Date(createMemberDto.date_of_birth),
+      roles: [Role.Member],
     });
   }
-
   @Get()
   @Roles(Role.Admin)
   findAll() {

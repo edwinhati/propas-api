@@ -11,6 +11,7 @@ import { CreateMemberDto } from './member.dto';
 import { MembersService } from './members.service';
 import { Public } from 'src/auth/auth.decorator';
 import { Roles, Role } from 'src/roles/roles.decorator';
+import { ValidationPipe } from 'src/validation.pipe';
 
 @Controller('members')
 export class MembersController {
@@ -18,7 +19,7 @@ export class MembersController {
 
   @Public()
   @Post()
-  create(@Body() createMemberDto: CreateMemberDto) {
+  create(@Body(new ValidationPipe()) createMemberDto: CreateMemberDto) {
     return this.membersService.create({
       ...createMemberDto,
       date_of_birth: new Date(createMemberDto.date_of_birth),

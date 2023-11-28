@@ -1,9 +1,9 @@
-import { IsString, IsDate, IsEmail } from 'class-validator';
+import { IsString, IsEmail, Length, IsArray } from 'class-validator';
 import { PartialType } from '@nestjs/swagger';
 import { Role } from 'src/roles/roles.decorator';
 
 export class CreateMemberDto {
-  @IsString()
+  @Length(16, 16)
   nik: string;
 
   @IsString()
@@ -12,7 +12,6 @@ export class CreateMemberDto {
   @IsString()
   place_of_birth: string;
 
-  @IsDate()
   date_of_birth: Date;
 
   @IsString()
@@ -36,6 +35,7 @@ export class CreateMemberDto {
   @IsString()
   marital_status: string;
 
+  @Length(10, 13)
   phone_number: string;
 
   @IsEmail()
@@ -44,6 +44,7 @@ export class CreateMemberDto {
   @IsString()
   password: string;
 
+  @IsArray()
   roles: Role[];
 }
 

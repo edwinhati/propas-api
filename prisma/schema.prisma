@@ -28,3 +28,11 @@ model Member {
   password        String?
   roles           String[]   @default(["member"])
 }
+
+model News {
+  id      String      @id @default(uuid())
+  title   String
+  content String
+  media   String
+  source  String?
+}

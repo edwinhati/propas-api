@@ -1,0 +1,1 @@
+ssh -i key.pem ubuntu@54.254.251.51

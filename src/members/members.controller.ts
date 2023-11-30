@@ -12,6 +12,7 @@ import { MembersService } from './members.service';
 import { Public } from 'src/auth/auth.decorator';
 import { Roles, Role } from 'src/roles/roles.decorator';
 import { ValidationPipe } from 'src/validation.pipe';
+import { SkipThrottle } from '@nestjs/throttler';
 
 @Controller('members')
 export class MembersController {
@@ -19,6 +20,7 @@ export class MembersController {
 
   @Public()
   @Post()
+  @SkipThrottle({ default: false })
   create(@Body(new ValidationPipe()) createMemberDto: CreateMemberDto) {
     return this.membersService.create({
       ...createMemberDto,

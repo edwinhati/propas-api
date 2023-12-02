@@ -20,7 +20,7 @@ export class MembersController {
 
   @Public()
   @Post()
-  @SkipThrottle({ default: false })
+  @SkipThrottle({ default: true })
   create(@Body(new ValidationPipe()) createMemberDto: CreateMemberDto) {
     return this.membersService.create({
       ...createMemberDto,
